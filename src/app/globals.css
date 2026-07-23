@@ -2,19 +2,25 @@
 
 @layer base {
   :root {
-    --background: #F8F6F0; /* Kem ngà dịu mắt */
-    --foreground: #242424; /* Xám đen mờ, không chói */
-    --muted: #666666;
-    --border: #E6E2D8;
-    --accent: #3B5998;
+    --background: #FAFAFA; /* Off-white dịu mát */
+    --foreground: #171717; /* Chữ tối tương phản sắc nét */
+    --muted: #525252; /* Chữ phụ chuẩn WCAG */
+    --border: #E5E5E5;
+    --accent: #0EA5E9; /* Electric Cyan / Ocean Teal năng động hiện đại */
+    --accent-hover: #0284C7;
+    --card-bg: #FFFFFF;
+    --card-border: #E5E7EB;
   }
 
   .dark {
-    --background: #18181A; /* Xám đen than chì ban đêm */
-    --foreground: #E4E4E6; /* Trắng ngà mềm */
-    --muted: #99999E;
-    --border: #2A2A2E;
-    --accent: #8AB4F8;
+    --background: #0F0F10; /* Đen nhám chì sâu lắng */
+    --foreground: #F3F4F6;
+    --muted: #9CA3AF;
+    --border: #27272A;
+    --accent: #38BDF8; /* Electric Cyan phát sáng rực rỡ trên nền tối */
+    --accent-hover: #7DD3FC;
+    --card-bg: #18181B;
+    --card-border: #27272A;
   }
 }
 
@@ -24,14 +30,57 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-accent: var(--accent);
-  --font-serif: var(--font-serif), Georgia, serif;
-  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-serif: var(--font-serif), Newsreader, Georgia, serif;
+  --font-sans: var(--font-sans), Inter, system-ui, sans-serif;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
+
+/* Custom Editorial Focus Dimming for Lists */
+.focus-dim-group:hover .focus-dim-item {
+  opacity: 0.45;
+  filter: blur(0.3px);
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.focus-dim-group .focus-dim-item:hover {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateX(4px);
+}
+
+/* Shape Outside for Editorial Floating Avatar */
+.shape-outside-circle {
+  shape-outside: circle(50%);
+  -webkit-shape-outside: circle(50%);
+}
+
+/* Page Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main {
+    animation: none;
+  }
+}
+
+
 

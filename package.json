@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "velite --watch & next dev",
-    "build": "velite && next build",
+    "build": "velite && tsx scripts/validate-build.ts && next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -28,6 +28,7 @@
     "remark-wiki-link": "^2.0.1",
     "shiki": "^4.3.1",
     "tailwindcss": "^4",
+    "tsx": "^4.23.1",
     "typescript": "^5",
     "velite": "^0.4.0"
   }
