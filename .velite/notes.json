@@ -1,0 +1,13 @@
+[
+  {
+    "title": "Học Next.js 15 và Digital Garden",
+    "slug": "learning-nextjs",
+    "date": "2026-07-23T00:00:00.000Z",
+    "publish": true,
+    "tags": [
+      "learning",
+      "nextjs"
+    ],
+    "body": "const{Fragment:n,jsx:e,jsxs:t}=arguments[0];function _createMdxContent(c){const r={a:\"a\",h1:\"h1\",p:\"p\",strong:\"strong\",...c.components};return t(n,{children:[e(r.h1,{id:\"học-nextjs-15\",children:e(r.a,{className:\"subheading-anchor\",href:\"#học-nextjs-15\",children:\"Học Next.js 15\"})}),\"\\n\",t(r.p,{children:[\"Đây là một ghi chú public trong \",e(r.strong,{children:\"Second Brain\"}),\".\"]}),\"\\n\",t(r.p,{children:[\"Tôi đang học cách kết nối các ghi chú với nhau bằng cú pháp \",e(r.a,{className:\"internal new\",href:\"/notes/private-thought\",children:\"private-thought\"}),\".\"]})]})}return{default:function(n={}){const{wrapper:t}=n.components||{};return t?e(t,{...n,children:e(_createMdxContent,{...n})}):_createMdxContent(n)}};"
+  }
+]

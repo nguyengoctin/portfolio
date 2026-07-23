@@ -1,0 +1,19 @@
+[
+  {
+    "title": "Personal Portfolio & Second Brain Website",
+    "slug": "portfolio-site",
+    "description": "Trang cá nhân kết hợp hệ thống ghi chú tri thức dựa trên Next.js 15 và Velite.",
+    "publish": true,
+    "techStack": [
+      "Next.js 15",
+      "TypeScript",
+      "TailwindCSS",
+      "Velite",
+      "Pagefind"
+    ],
+    "demoUrl": "https://example.com",
+    "githubUrl": "https://github.com",
+    "order": 1,
+    "body": "const{Fragment:n,jsx:e,jsxs:t}=arguments[0];function _createMdxContent(o){const r={a:\"a\",h1:\"h1\",p:\"p\",...o.components};return t(n,{children:[e(r.h1,{id:\"dự-án-portfolio--second-brain\",children:e(r.a,{className:\"subheading-anchor\",href:\"#dự-án-portfolio--second-brain\",children:\"Dự án Portfolio & Second Brain\"})}),\"\\n\",e(r.p,{children:\"Dự án này giúp tôi quản lý toàn bộ bài viết blog và ghi chú cá nhân dạng Digital Garden.\"})]})}return{default:function(n={}){const{wrapper:t}=n.components||{};return t?e(t,{...n,children:e(_createMdxContent,{...n})}):_createMdxContent(n)}};"
+  }
+]
