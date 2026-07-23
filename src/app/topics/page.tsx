@@ -1,38 +1,36 @@
-import Link from "next/link";
 import { posts, notes } from "#site/content";
 
 export default function TopicsPage() {
-  // Gom tất cả các tag từ bài viết blog và notes
   const allTags = Array.from(
     new Set([
       ...posts.flatMap((p) => p.tags),
       ...notes.flatMap((n) => n.tags),
     ])
-  );
+  ).sort();
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8 py-4">
+    <div className="space-y-8">
       <header className="space-y-2 border-b border-[var(--border)] pb-4">
-        <h1 className="text-3xl font-serif font-bold">Chủ đề & Thẻ (Topics)</h1>
+        <h1 className="text-3xl font-serif font-bold">Topics</h1>
         <p className="text-sm text-[var(--muted)]">
-          Khám phá tất cả các chủ đề kiến thức được phân loại trong Second Brain.
+          Tất cả các chủ đề kiến thức được phân loại trong Second Brain.
         </p>
       </header>
 
-      <div className="flex flex-wrap gap-3">
+      <div className="focus-dim-group divide-y divide-[var(--border)]">
         {allTags.map((tag) => {
           const postCount = posts.filter((p) => p.tags.includes(tag)).length;
           const noteCount = notes.filter((n) => n.tags.includes(tag)).length;
           const total = postCount + noteCount;
 
           return (
-            <div
-              key={tag}
-              className="px-4 py-2 rounded-lg border border-[var(--border)] bg-[var(--background)] hover:border-[var(--accent)] transition-colors flex items-center gap-2"
-            >
-              <span className="font-medium text-sm">#{tag}</span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--border)] text-[var(--muted)] font-mono">
-                {total}
+            <div key={tag}
+              className="focus-dim-item group flex items-baseline justify-between gap-4 py-3.5 transition-all duration-200">
+              <span className="font-medium text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
+                #{tag}
+              </span>
+              <span className="text-xs font-mono text-[var(--muted)]">
+                {total} {total === 1 ? "item" : "items"}
               </span>
             </div>
           );

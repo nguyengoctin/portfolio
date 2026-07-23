@@ -1,0 +1,143 @@
+---
+title: "Demo of all components on this website"
+date: "2026-07-23"
+publish: true
+tags: ["nextjs", "web-dev", "ssg", "cms", "components"]
+---
+
+<Callout emoji="☝" title="Demo Notice">
+The content of this post is composed to showcase 100% of all UI components available on this website, matching the exact structure from dinhanhthi.com.
+</Callout>
+
+## Basic blocks
+
+### Text
+
+*All kinds* of **text** styling options are supported. Basic text blocks also support `inline code`, ~~strikethrough~~, and [links](https://dinhanhthi.com).
+
+### Quote
+
+> This is a standard Markdown blockquote. It renders as a subtle left-border quote with italic text, different from a Callout.
+
+### Callout — 4 biến thể
+
+<Callout type="info" title="Info — Thông tin">
+Đây là Callout loại **info** với viền và nền **Cyan** (màu nhấn hệ thống). Dùng cho các ghi chú, giải thích thêm.
+</Callout>
+
+<Callout type="warning" title="Warning — Cảnh báo">
+Đây là Callout loại **warning** với viền và nền **Amber/Vàng cam**. Dùng cho các lưu ý quan trọng cần chú ý.
+</Callout>
+
+<Callout type="tip" title="Tip — Mẹo hay">
+Đây là Callout loại **tip** với viền và nền **Emerald/Xanh lá**. Dùng để chia sẻ mẹo, gợi ý hữu ích.
+</Callout>
+
+<Callout type="note" title="Note — Ghi chú">
+Đây là Callout loại **note** với viền và nền **Purple/Tím**. Dùng cho các ghi chú phụ, tham khảo thêm.
+</Callout>
+
+### Toggle (or hide/show)
+
+<Toggle title="Click to expand full directory tree">
+```text
+src/components/
+├── MDXComponents.tsx   # All Notion & Josh Comeau components
+├── ReaderUtils.tsx     # Progress bar & Back to top button
+├── SidebarTOC.tsx      # Table of contents navigation
+└── MDXContent.tsx      # MDX compiler & mapper
+```
+</Toggle>
+
+### Callout
+
+<Callout emoji="🚨" title="Basic Callout">
+This is a basic callout block. It can contain text, icons, and *rich text* formatting. 💪
+</Callout>
+
+### Ordered list
+
+1. Item 1
+   - Nested unordered list
+   - Another item
+2. Item 2
+   1. Level 2
+      1. Level 3
+
+### Unordered list
+
+- Item 1
+  - Level 2
+    - Level 3
+- Item 2
+  1. Nested ordered list
+  2. Another item
+
+### To do list
+
+<ToDo checked={true}>Task 1: Build full component suite</ToDo>
+<ToDo checked={false}>Task 2: Verify light/dark theme contrast</ToDo>
+<ToDo checked={false}>Task 3: Test responsive layout on mobile</ToDo>
+
+### Divider
+
+<Divider />
+
+## Integrations
+
+### Video youtube
+
+<Youtube id="Lgvc0l1UyaU" />
+
+### Equations
+
+This is inline <Math formula="1/2" inline={true} /> equation. And below is a block equation:
+
+<Math formula="rho * [ (d u / d t) + u * grad(u) ] = grad . sigma + f" />
+
+### Table
+
+| Component | Markdown Syntax | Description | Status |
+| :--- | :--- | :--- | :--- |
+| **Callout** | `<Callout />` | Highlighted notification box | Ready |
+| **Toggle** | `<Toggle />` | Collapsible content container | Ready |
+| **Columns** | `<Columns>` | Flexible multi-column layout | Ready |
+
+### Code
+
+This is inline `code` and below is block code with single-click copy button:
+
+```python
+def sum_and_div(num1, num2):
+    sum_nums = num1 + num2
+    div_nums = num1 / num2
+    return sum_nums, div_nums # multiple returns
+
+sum, div = sum_and_div(18, 9)
+print(sum, div)
+```
+
+## Advanced blocks
+
+### Columns
+
+<Columns>
+<div>
+<strong>Left Column Code</strong>
+```python
+print("Hello Left Column!")
+```
+</div>
+<div>
+<strong>Right Column Code</strong>
+```python
+print("Hello Right Column!")
+```
+</div>
+</Columns>
+
+### Synced blocks
+
+<SyncedBlock>
+You can use synced blocks to replicate content snippets across multiple articles without duplicating source code.
+</SyncedBlock>

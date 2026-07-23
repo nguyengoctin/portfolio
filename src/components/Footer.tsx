@@ -7,7 +7,7 @@ export function Footer() {
         </div>
         <div className="flex gap-4">
           <a
-            href="https://github.com"
+            href="https://github.com/ngoctinn"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:underline hover:text-[var(--foreground)] transition-colors"
@@ -21,6 +21,12 @@ export function Footer() {
             className="hover:underline hover:text-[var(--foreground)] transition-colors"
           >
             LinkedIn
+          </a>
+          <a
+            href="mailto:ngoctin.work@gmail.com"
+            className="hover:underline hover:text-[var(--foreground)] transition-colors"
+          >
+            Email
           </a>
         </div>
       </div>

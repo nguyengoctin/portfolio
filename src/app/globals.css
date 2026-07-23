@@ -1,24 +1,30 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@variant dark (&:where(.dark, .dark *));
 
 @layer base {
   :root {
-    --background: #FAFAFA; /* Off-white dịu mát */
-    --foreground: #171717; /* Chữ tối tương phản sắc nét */
-    --muted: #525252; /* Chữ phụ chuẩn WCAG */
+    --background: #FAFAFA;
+    --foreground: #171717;
+    --muted: #525252;
     --border: #E5E5E5;
-    --accent: #0EA5E9; /* Electric Cyan / Ocean Teal năng động hiện đại */
-    --accent-hover: #0284C7;
+    --accent: #FF6B4A;           /* Cam San Hô — Primary Accent (70%) */
+    --accent-hover: #E05334;
+    --accent-coral: #00A896;     /* Cyan — Secondary Accent (30%) */
+    --accent-coral-hover: #028073;
     --card-bg: #FFFFFF;
     --card-border: #E5E7EB;
   }
 
   .dark {
-    --background: #0F0F10; /* Đen nhám chì sâu lắng */
+    --background: #0F0F10;
     --foreground: #F3F4F6;
     --muted: #9CA3AF;
     --border: #27272A;
-    --accent: #38BDF8; /* Electric Cyan phát sáng rực rỡ trên nền tối */
-    --accent-hover: #7DD3FC;
+    --accent: #FF7A5C;           /* Cam San Hô sáng hơn trên nền tối */
+    --accent-hover: #FF886E;
+    --accent-coral: #2EC4B6;     /* Cyan tươi — Secondary Accent */
+    --accent-coral-hover: #6FFFE9;
     --card-bg: #18181B;
     --card-border: #27272A;
   }
@@ -29,9 +35,10 @@
   --color-ink: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
-  --color-accent: var(--accent);
-  --font-serif: var(--font-serif), Newsreader, Georgia, serif;
-  --font-sans: var(--font-sans), Inter, system-ui, sans-serif;
+  --color-accent: var(--accent);       /* Primary — Coral */
+  --color-secondary: var(--accent-coral); /* Secondary — Cyan */
+  --font-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 body {
@@ -72,15 +79,34 @@ body {
   }
 }
 
-main {
-  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Custom Marquee Scroll Animation */
+@keyframes scrollRtl {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  main {
-    animation: none;
-  }
+@keyframes scrollLtr {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }
+
+.animate-scroll-rtl {
+  display: flex;
+  width: max-content;
+  animation: scrollRtl 35s linear infinite;
+}
+
+.animate-scroll-ltr {
+  display: flex;
+  width: max-content;
+  animation: scrollLtr 35s linear infinite;
+}
+
+.animate-scroll-rtl:hover,
+.animate-scroll-ltr:hover {
+  animation-play-state: paused;
+}
+
 
 
 

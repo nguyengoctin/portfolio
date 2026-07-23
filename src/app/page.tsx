@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { posts, projects, notes } from "#site/content";
 import { EditorialList } from "@/components/EditorialList";
+import { TechStackMarquee } from "@/components/TechStackMarquee";
+import { ExperiencesSection } from "@/components/ExperiencesSection";
+
 
 
 export default function HomePage() {
@@ -15,7 +18,7 @@ export default function HomePage() {
 
   return (
     <div className="space-y-16 py-4">
-      {/* 1. Hero Bio Section (Chip Huyen Style text wrapping around floating circle avatar) */}
+      {/* 1. Hero Bio Section (Simple, Humble & Natural Notebook Style) */}
       <section className="relative pt-2 pb-6 border-b border-[var(--border)]">
         <div className="block overflow-hidden leading-relaxed">
           {/* Floating Circle Avatar */}
@@ -28,68 +31,66 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[var(--foreground)] font-serif leading-tight mb-4">
-            Hi, I'm Tin<span className="text-[var(--accent)]">.</span>
+            Hi, I'm Tin<span className="text-[var(--accent-coral)]">.</span>
           </h1>
 
           <div className="space-y-4 text-base sm:text-lg text-[var(--muted)] leading-relaxed">
             <p>
-              I’m <strong className="text-[var(--foreground)] font-semibold">Nguyen Ngoc Tin</strong>, a software engineer passionate about building high-performance web applications and software systems.
+              I’m <strong className="text-[var(--foreground)] font-semibold">Nguyen Ngoc Tin</strong>, a recent software engineering graduate on a continuous journey to learn something new every day.
             </p>
             <p>
-              I focus on crafting modern user experiences, optimizing full-stack applications, and building reliable systems.
+              I work with web development and code, knowing just a little bit about many things. The more I learn, the more I realize how much more there is to explore.
             </p>
             <p>
-              This is my personal space — both a <strong className="text-[var(--foreground)] font-semibold">Portfolio</strong> showcasing my recent work and a <strong className="text-[var(--foreground)] font-semibold">Second Brain (Digital Garden)</strong> where I store notes, technical write-ups, and daily reflections.
+              I love reading books, exploring new technologies, and sharing interesting things I stumble upon. I see myself as a lifelong beginner who simply enjoys the process of learning.
             </p>
             <p>
-              I enjoy tackling fun technical challenges and collaborating with great teams. Feel free to explore my <Link href="/blog" className="text-[var(--accent)] underline hover:opacity-80">articles</Link> or delve into my <Link href="/notes" className="text-[var(--accent)] underline hover:opacity-80">Digital Garden</Link>!
+              Think of this site as my online notebook — a quiet place where I document my daily learning journey, store coding notes, and share my small experiments.
+            </p>
+            <p>
+              Feel free to read my <Link href="/blog" className="text-[var(--accent)] underline hover:text-[var(--accent-coral)] transition-colors">posts</Link> or browse through my <Link href="/notes" className="text-[var(--accent)] underline hover:text-[var(--accent-coral)] transition-colors">notes</Link>!
             </p>
           </div>
         </div>
       </section>
 
-      {/* 2. Featured Projects Grid Section */}
+      {/* 2. Continuous Scrolling Tech Stack Section */}
+      <TechStackMarquee />
+
+      {/* 3. Experiences & Education Section */}
+      <ExperiencesSection />
+
+      {/* 4. Featured Projects Grid Section */}
       {featuredProjects.length > 0 && (
-        <section className="space-y-6 pt-4 border-t border-[var(--border)]">
+        <section className="space-y-5 pt-4 border-t border-[var(--border)]">
           <div className="flex items-center justify-between">
             <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight">Featured Projects</h2>
-            <Link
-              href="/projects"
-              className="text-xs sm:text-sm text-[var(--accent)] font-medium hover:underline flex items-center gap-1"
-            >
-              All Projects <span>→</span>
+            <Link href="/projects" className="text-xs sm:text-sm text-[var(--accent)] font-medium hover:underline">
+              All Projects →
             </Link>
           </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="focus-dim-group divide-y divide-[var(--border)]">
             {featuredProjects.map((project) => (
-              <Link
-                key={project.slug}
-                href={`/projects`}
-                className="group p-6 rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] hover:border-[var(--accent)] transition-all duration-200 flex flex-col justify-between space-y-4 shadow-xs"
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold font-serif group-hover:text-[var(--accent)] transition-colors">
-                      {project.title}
-                    </h3>
-                    <span className="text-xs text-[var(--muted)] group-hover:translate-x-1 transition-transform">↗</span>
+              <div key={project.slug} className="focus-dim-item group py-3.5 transition-all duration-200">
+                <div className="flex items-baseline justify-between gap-4">
+                  <span className="font-medium text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors leading-snug">
+                    {project.title}
+                  </span>
+                  <div className="flex gap-3 shrink-0 text-xs">
+                    {project.demoUrl && (
+                      <a href={project.demoUrl} target="_blank" rel="noopener noreferrer"
+                        className="text-[var(--accent)] hover:underline font-medium">Live ↗</a>
+                    )}
+                    {project.githubUrl && (
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
+                        className="text-[var(--muted)] hover:underline">GitHub ↗</a>
+                    )}
                   </div>
-                  <p className="text-sm text-[var(--muted)] line-clamp-2 leading-relaxed">
-                    {project.description}
-                  </p>
                 </div>
-                <div className="flex flex-wrap gap-1.5 pt-2">
-                  {project.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-0.5 text-[11px] font-mono rounded-md border border-[var(--border)] bg-[var(--background)] text-[var(--muted)]"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </Link>
+                <p className="text-sm text-[var(--muted)] mt-1 leading-relaxed line-clamp-1">
+                  {project.description}
+                </p>
+              </div>
             ))}
           </div>
         </section>
@@ -127,4 +128,6 @@ export default function HomePage() {
     </div>
   );
 }
+
+
 

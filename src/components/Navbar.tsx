@@ -19,28 +19,12 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[var(--border)] bg-[var(--background)]/85 backdrop-blur-md transition-all duration-200">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-        {/* Left Side: Brand Logo */}
+        {/* Left Side: Minimalist Brand Logo (Chip Huyen Style) */}
         <Link
           href="/"
-          className="font-serif font-bold text-xl sm:text-2xl tracking-tight shrink-0 hover:opacity-80 transition-opacity flex items-center gap-1 group"
+          className="font-sans text-[17px] font-normal tracking-tight shrink-0 hover:opacity-75 transition-opacity text-[var(--foreground)]"
         >
-          <span className="group-hover:text-[var(--accent)] transition-colors">Nguyen</span>
-          <span className="relative text-[var(--accent)] italic font-sans font-light">
-            Ngoc Tin
-            <svg
-              className="absolute -bottom-1 left-0 w-full h-1 text-[var(--accent)] opacity-70"
-              viewBox="0 0 40 4"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1 3C10 1.5 25 1 39 2.5"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
-          </span>
+          Nguyen Ngoc Tin
         </Link>
 
         {/* Center: Main Navigation Menu */}
