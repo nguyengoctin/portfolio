@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 // Icon SVGs
 const InfoIcon = () => (
@@ -81,11 +81,31 @@ export function Callout({
   );
 }
 
-// Quote: viền trái mờ + nền card + chữ italic muted — khác hẳn Callout
-export function Quote({ children }: { children: React.ReactNode }) {
+// Quote Component — Nền xám card thanh lịch với 2 dấu ngoặc kép to mờ ở hai đầu
+export function Quote({ children, author }: { children: React.ReactNode; author?: string }) {
   return (
-    <blockquote className="my-5 pl-5 border-l-4 border-[var(--border)] bg-[var(--card-bg)] py-3 pr-4 rounded-r-lg text-[var(--muted)] leading-relaxed italic not-prose">
-      {children}
+    <blockquote className="relative my-7 p-6 sm:p-8 rounded-2xl bg-[var(--card-bg)] border border-[var(--border)] shadow-xs not-prose overflow-hidden">
+      {/* Dấu ngoặc mở to mờ góc trên trái */}
+      <span className="absolute top-1 left-3 text-5xl sm:text-6xl font-serif font-bold text-[var(--muted)]/25 select-none pointer-events-none leading-none">
+        “
+      </span>
+
+      {/* Dấu ngoặc đóng to mờ góc dưới phải */}
+      <span className="absolute bottom-0 right-3 text-5xl sm:text-6xl font-serif font-bold text-[var(--muted)]/25 select-none pointer-events-none leading-none">
+        ”
+      </span>
+
+      {/* Nội dung trích dẫn */}
+      <div className="relative z-10 font-serif italic text-base sm:text-lg text-[var(--foreground)] leading-relaxed px-2">
+        {children}
+      </div>
+
+      {/* Nguồn/Tác giả trích dẫn */}
+      {author && (
+        <cite className="relative z-10 block mt-3 text-xs font-mono text-[var(--muted)] not-italic text-right tracking-wider">
+          — {author}
+        </cite>
+      )}
     </blockquote>
   );
 }

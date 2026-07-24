@@ -4,6 +4,13 @@ import path from "path";
 // Đọc danh sách dữ liệu đã xuất bản từ .velite/
 const veliteDir = path.join(process.cwd(), ".velite");
 
+interface ContentItem {
+  title?: string;
+  slug?: string;
+  publish?: boolean;
+  body?: string;
+}
+
 function validateBuild() {
   console.log("🔍 Đang chạy kịch bản kiểm thử bảo mật & liên kết tự động (CI Validation)...");
 
@@ -15,8 +22,8 @@ function validateBuild() {
   collections.forEach((file) => {
     const filePath = path.join(veliteDir, file);
     if (fs.existsSync(filePath)) {
-      const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-      const leakedItems = data.filter((item: any) => item.publish !== true);
+      const data: ContentItem[] = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+      const leakedItems = data.filter((item) => item.publish !== true);
 
       if (leakedItems.length > 0) {
         console.error(`❌ CẢNH BÁO BẢO MẬT: Phát hiện ${leakedItems.length} mục publish: false bị rò rỉ trong file ${file}!`);
@@ -30,13 +37,14 @@ function validateBuild() {
   // 2. Kiểm tra Broken WikiLinks trong Second Brain Notes
   const notesPath = path.join(veliteDir, "notes.json");
   if (fs.existsSync(notesPath)) {
-    const notes = JSON.parse(fs.readFileSync(notesPath, "utf-8"));
-    const validSlugs = new Set(notes.map((n: any) => n.slug));
+    const notes: ContentItem[] = JSON.parse(fs.readFileSync(notesPath, "utf-8"));
+    const validSlugs = new Set(notes.map((n) => n.slug));
 
-    notes.forEach((note: any) => {
+    notes.forEach((note) => {
+      if (!note.body) return;
       // Tìm các đường dẫn internal link trong nội dung MDX
       const internalLinkRegex = /\/notes\/([a-zA-Z0-9_-]+)/g;
-      let match;
+      let match: RegExpExecArray | null;
       while ((match = internalLinkRegex.exec(note.body)) !== null) {
         const targetSlug = match[1];
         if (!validSlugs.has(targetSlug)) {

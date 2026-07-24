@@ -1,27 +1,27 @@
+import { PageHeader } from "@/components/PageHeader";
+
 export default function ReadingPage() {
   const books = [
     {
       title: "Designing Data-Intensive Applications",
       author: "Martin Kleppmann",
       status: "reading",
-      note: "Cuốn sách tuyệt vời về kiến trúc hệ thống dữ liệu phân tán.",
+      note: "A comprehensive guide on distributed system architecture.",
     },
     {
       title: "Clean Code",
       author: "Robert C. Martin",
       status: "done",
-      note: "Bài học về cách viết mã nguồn sạch và dễ bảo trì.",
+      note: "Lessons on writing clean, maintainable software.",
     },
   ];
 
   return (
     <div className="space-y-8">
-      <header className="space-y-2 border-b border-[var(--border)] pb-4">
-        <h1 className="text-3xl font-serif font-bold">Reading</h1>
-        <p className="text-sm text-[var(--muted)]">
-          Danh sách các cuốn sách kỹ thuật và tư duy tôi đã và đang nghiên cứu.
-        </p>
-      </header>
+      <PageHeader
+        title="Reading"
+        description="Technical books and literature I am currently reading or have completed."
+      />
 
       <div className="focus-dim-group divide-y divide-[var(--border)]">
         {books.map((book) => (

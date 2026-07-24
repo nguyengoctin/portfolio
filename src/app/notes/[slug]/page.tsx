@@ -6,6 +6,8 @@ import { getBacklinks } from "@/lib/backlinks";
 import { Backlinks } from "@/components/Backlinks";
 import { SidebarTOC } from "@/components/SidebarTOC";
 import { ReadingProgressBar, BackToTopButton } from "@/components/ReaderUtils";
+import { SITE_CONFIG } from "@/config/site";
+import { formatDate, calculateReadTime } from "@/lib/formatters";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -28,12 +30,8 @@ export default async function NoteDetailPage({ params }: PageProps) {
 
   // Tính toán danh sách backlinks
   const backlinks = getBacklinks(slug);
-
-  // Tính thời gian đọc trung bình (Ví dụ: ~200 từ/phút)
-  const wordCount = note.body ? note.body.split(/\s+/).length : 0;
-  const readTimeMinutes = Math.max(1, Math.ceil(wordCount / 200));
-
-  const githubEditUrl = `https://github.com/ngoctinn/portfolio/blob/main/content/notes/${slug}.mdx`;
+  const readTimeMinutes = calculateReadTime(note.body);
+  const githubEditUrl = `${SITE_CONFIG.githubRepo}/blob/main/content/notes/${slug}.mdx`;
 
   return (
     <div className="space-y-8 w-full relative">
@@ -56,7 +54,7 @@ export default async function NoteDetailPage({ params }: PageProps) {
                 <circle cx="12" cy="8" r="5" />
                 <path d="M20 21a8 8 0 0 0-16 0" />
               </svg>
-              Nguyen Ngoc Tin
+              {SITE_CONFIG.author.name}
             </div>
 
             <span className="hidden sm:inline opacity-50">•</span>
@@ -65,7 +63,7 @@ export default async function NoteDetailPage({ params }: PageProps) {
                 <rect width="18" height="18" x="3" y="4" rx="2" />
                 <path d="M3 10h18M8 2v4M16 2v4" />
               </svg>
-              <span>{new Date(note.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
+              <span>{formatDate(note.date)}</span>
             </div>
 
             <span className="hidden sm:inline opacity-50">•</span>
@@ -102,15 +100,15 @@ export default async function NoteDetailPage({ params }: PageProps) {
         </div>
       </header>
 
-      {/* Nút quay lại Second Brain */}
+      {/* Back to Notes Link */}
       <Link
         href="/notes"
         className="text-xs text-[var(--muted)] hover:text-[var(--foreground)] transition-colors inline-block pt-2"
       >
-        ← Quay lại Second Brain
+        ← Back to Notes
       </Link>
 
-      {/* Bố cục 2 cột chuẩn dinhanhthi.com (Cột trái: Bài viết MDX, Cột phải: TOC Sidebar) */}
+      {/* Bố cục 2 cột (Cột trái: Bài viết MDX, Cột phải: TOC Sidebar) */}
       <div className="flex flex-col lg:flex-row items-start gap-12 relative">
         {/* Main Content Area */}
         <div className="flex-1 min-w-0 w-full space-y-8">
@@ -126,7 +124,3 @@ export default async function NoteDetailPage({ params }: PageProps) {
     </div>
   );
 }
-
-
-
-

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { formatDate } from "@/lib/formatters";
 
 interface EditorialItem {
   title: string;
@@ -55,11 +56,7 @@ export function EditorialList({
                 <span className="truncate">{item.title}</span>
               </h3>
               <p className="text-xs text-[var(--muted)] font-mono">
-                {new Date(item.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
+                {formatDate(item.date)}
               </p>
             </Link>
           ))}

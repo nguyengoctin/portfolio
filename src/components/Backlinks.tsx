@@ -11,7 +11,7 @@ export function Backlinks({ backlinks }: BacklinksProps) {
   return (
     <section className="mt-12 pt-6 border-t border-[var(--border)] space-y-4">
       <h3 className="text-sm font-semibold font-serif text-[var(--muted)] tracking-wider uppercase">
-        Ghi chú trỏ tới bài này (Linked References)
+        Linked References
       </h3>
 
       <div className="grid gap-3 sm:grid-cols-2">

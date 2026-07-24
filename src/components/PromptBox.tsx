@@ -41,12 +41,11 @@ export function CopyButton({ text }: CopyButtonProps) {
 }
 
 interface CalloutProps {
-  type?: "note" | "tip" | "warning" | "important";
   title?: string;
   children: React.ReactNode;
 }
 
-export function Callout({ type = "note", title = "Intended audience", children }: CalloutProps) {
+export function Callout({ title = "Intended audience", children }: CalloutProps) {
   return (
     <aside className="relative my-8 p-6 pl-14 sm:pl-16 rounded-2xl bg-[#F8FAFC] dark:bg-[#111827] text-[var(--foreground)] border-l-4 border-[var(--accent)] shadow-xs overflow-hidden border border-[#E2E8F0] dark:border-[#1F2937]">
       {/* Icon Lucide Info 28px chuẩn Josh Comeau */}

@@ -1,4 +1,4 @@
-import { notes, Note } from "#site/content";
+import { notes } from "#site/content";
 
 export interface BacklinkItem {
   title: string;

@@ -1,17 +1,16 @@
 import { projects } from "#site/content";
+import { PageHeader } from "@/components/PageHeader";
 
 export default function ToolsPage() {
   return (
     <div className="space-y-8">
-      <header className="space-y-2 border-b border-[var(--border)] pb-4">
-        <h1 className="text-3xl font-serif font-bold">Tools</h1>
-        <p className="text-sm text-[var(--muted)]">
-          Các ứng dụng, tiện ích và phần mềm do tôi phát triển.
-        </p>
-      </header>
+      <PageHeader
+        title="Tools"
+        description="Developer utilities, web applications, and software tools I built."
+      />
 
       {projects.length === 0 ? (
-        <p className="text-sm text-[var(--muted)]">Chưa có công cụ nào.</p>
+        <p className="text-sm text-[var(--muted)]">No tools published yet.</p>
       ) : (
         <div className="focus-dim-group divide-y divide-[var(--border)]">
           {projects.map((project) => (

@@ -1,40 +1,62 @@
+import Link from "next/link";
 import { posts, notes } from "#site/content";
+import { PageHeader } from "@/components/PageHeader";
 
 export default function TopicsPage() {
-  const allTags = Array.from(
-    new Set([
-      ...posts.flatMap((p) => p.tags),
-      ...notes.flatMap((n) => n.tags),
-    ])
-  ).sort();
+  const topicMap = new Map<string, { postsCount: number; notesCount: number }>();
+
+  posts.forEach((p) => {
+    (p.tags || []).forEach((t) => {
+      if (!topicMap.has(t)) topicMap.set(t, { postsCount: 0, notesCount: 0 });
+      topicMap.get(t)!.postsCount++;
+    });
+  });
+
+  notes.forEach((n) => {
+    (n.tags || []).forEach((t) => {
+      if (!topicMap.has(t)) topicMap.set(t, { postsCount: 0, notesCount: 0 });
+      topicMap.get(t)!.notesCount++;
+    });
+  });
+
+  const topics = Array.from(topicMap.entries())
+    .map(([name, counts]) => ({
+      name,
+      slug: name.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-"),
+      total: counts.postsCount + counts.notesCount,
+      postsCount: counts.postsCount,
+      notesCount: counts.notesCount,
+    }))
+    .sort((a, b) => b.total - a.total);
 
   return (
-    <div className="space-y-8">
-      <header className="space-y-2 border-b border-[var(--border)] pb-4">
-        <h1 className="text-3xl font-serif font-bold">Topics</h1>
-        <p className="text-sm text-[var(--muted)]">
-          Tất cả các chủ đề kiến thức được phân loại trong Second Brain.
-        </p>
-      </header>
+    <div className="space-y-8 w-full">
+      <PageHeader
+        title="Topics"
+        description="A list of topics I write about. Click any topic card to view all associated articles and notes."
+        badge={topics.length}
+      />
 
-      <div className="focus-dim-group divide-y divide-[var(--border)]">
-        {allTags.map((tag) => {
-          const postCount = posts.filter((p) => p.tags.includes(tag)).length;
-          const noteCount = notes.filter((n) => n.tags.includes(tag)).length;
-          const total = postCount + noteCount;
-
-          return (
-            <div key={tag}
-              className="focus-dim-item group flex items-baseline justify-between gap-4 py-3.5 transition-all duration-200">
-              <span className="font-medium text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
-                #{tag}
-              </span>
-              <span className="text-xs font-mono text-[var(--muted)]">
-                {total} {total === 1 ? "item" : "items"}
+      {/* Grid Thẻ Chủ đề 4 Cột chuẩn dinhanhthi.com */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+        {topics.map((t) => (
+          <Link
+            key={t.name}
+            id={`topic-${t.slug}`}
+            href={`/topics/${t.slug}`}
+            className="group flex items-center justify-between p-4 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-[var(--accent)] hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="text-[var(--accent)] font-mono font-bold text-base shrink-0">#</span>
+              <span className="font-medium text-sm sm:text-base text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors truncate capitalize">
+                {t.name}
               </span>
             </div>
-          );
-        })}
+            <span className="text-xs font-mono text-[var(--muted)] shrink-0 ml-2 bg-[var(--background)] px-2 py-0.5 rounded-md border border-[var(--border)]">
+              {t.total}
+            </span>
+          </Link>
+        ))}
       </div>
     </div>
   );

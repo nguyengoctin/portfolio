@@ -6,7 +6,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeShiki from "@shikijs/rehype";
 
 // Helper lọc bảo mật dữ liệu public
-const filterPublic = (items: any[]) => items?.filter((item) => item.publish === true) ?? [];
+const filterPublic = <T extends { publish?: boolean }>(items: T[]) => items?.filter((item) => item.publish === true) ?? [];
 
 // 1. Schema cho Bài Viết Blog
 const posts = defineCollection({

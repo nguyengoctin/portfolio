@@ -2,12 +2,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { posts } from "#site/content";
 import { MDXContent } from "@/components/MDXContent";
+import { formatDate } from "@/lib/formatters";
+import { SidebarTOC } from "@/components/SidebarTOC";
+import { ReadingProgressBar, BackToTopButton } from "@/components/ReaderUtils";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-// Hàm sinh static params cho SSG build
 export async function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.slug,
@@ -24,12 +26,15 @@ export default async function BlogPostDetailPage({ params }: PageProps) {
   }
 
   return (
-    <div className="space-y-8 w-full">
+    <div className="space-y-8 w-full relative">
+      <ReadingProgressBar />
+      <BackToTopButton />
+
       <Link
         href="/blog"
         className="text-xs text-[var(--muted)] hover:text-[var(--foreground)] transition-colors inline-block"
       >
-        ← Quay lại danh sách Blog
+        ← Back to Blog
       </Link>
 
       <header className="space-y-3 border-b border-[var(--border)] pb-6">
@@ -44,7 +49,7 @@ export default async function BlogPostDetailPage({ params }: PageProps) {
                 <rect width="18" height="18" x="3" y="4" rx="2" />
                 <path d="M3 10h18M8 2v4M16 2v4" />
               </svg>
-              <time>{new Date(post.date).toLocaleDateString("vi-VN")}</time>
+              <time>{formatDate(post.date)}</time>
             </div>
           </div>
 
@@ -58,8 +63,16 @@ export default async function BlogPostDetailPage({ params }: PageProps) {
         </div>
       </header>
 
-      {/* Hiển thị nội dung bài viết MDX */}
-      <MDXContent code={post.body} />
+      {/* Bố cục 2 cột (Cột trái: Bài viết MDX, Cột phải: TOC Sidebar) */}
+      <div className="flex flex-col lg:flex-row items-start gap-12 relative">
+        <div className="flex-1 min-w-0 w-full space-y-8">
+          <MDXContent code={post.body} />
+        </div>
+
+        <aside className="hidden lg:block w-64 shrink-0 sticky top-24 pt-2">
+          <SidebarTOC />
+        </aside>
+      </div>
     </div>
   );
 }

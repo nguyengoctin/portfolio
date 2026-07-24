@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { SITE_CONFIG } from "@/config/site";
 
 const navItems = [
   { name: "Blog", href: "/blog" },
@@ -24,7 +25,7 @@ export function Navbar() {
           href="/"
           className="font-sans text-[17px] font-normal tracking-tight shrink-0 hover:opacity-75 transition-opacity text-[var(--foreground)]"
         >
-          Nguyen Ngoc Tin
+          {SITE_CONFIG.name}
         </Link>
 
         {/* Center: Main Navigation Menu */}

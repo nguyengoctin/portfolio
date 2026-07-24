@@ -3,6 +3,7 @@ import { Inter, Lora } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import "katex/dist/katex.min.css";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,8 +17,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio & Second Brain",
-  description: "Trang cá nhân kết hợp ghi chú và bài viết công nghệ.",
+  title: "Nguyen Ngoc Tin — Portfolio & Notes",
+  description: "Personal portfolio, blog posts, and technical notes.",
 };
 
 export default function RootLayout({

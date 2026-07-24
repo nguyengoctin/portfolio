@@ -43,7 +43,7 @@ export function TechStackMarquee() {
     <section className="space-y-6 pt-6 pb-2 border-t border-[var(--border)]">
       <div className="flex items-center gap-2">
         <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight text-[var(--foreground)]">
-          Tech Stack I've Been Learning
+          Tech Stack I&apos;ve Been Learning
         </h2>
       </div>
 

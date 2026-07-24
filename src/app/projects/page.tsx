@@ -1,17 +1,16 @@
 import { projects } from "#site/content";
+import { PageHeader } from "@/components/PageHeader";
 
 export default function ProjectsListPage() {
   return (
     <div className="space-y-8">
-      <header className="space-y-2 border-b border-[var(--border)] pb-4">
-        <h1 className="text-3xl font-serif font-bold">Projects</h1>
-        <p className="text-sm text-[var(--muted)]">
-          Danh sách các ứng dụng, công cụ và sản phẩm phần mềm tôi đã thực hiện.
-        </p>
-      </header>
+      <PageHeader
+        title="Projects"
+        description="Software applications, open-source projects, and web tools I built."
+      />
 
       {projects.length === 0 ? (
-        <p className="text-sm text-[var(--muted)]">Chưa có dự án nào.</p>
+        <p className="text-sm text-[var(--muted)]">No projects published yet.</p>
       ) : (
         <div className="focus-dim-group divide-y divide-[var(--border)]">
           {projects.map((project) => (
